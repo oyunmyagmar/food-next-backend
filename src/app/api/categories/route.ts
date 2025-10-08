@@ -3,8 +3,8 @@ export async function GET() {
   return Response.json({ data: categories });
 }
 
-export async function POST(request: Request) {
-  const body = await request.json();
+export async function POST(req: Request) {
+  const body = await req.json();
   console.log(body);
   return Response.json({ message: "Hello from POST Categories" });
 }
