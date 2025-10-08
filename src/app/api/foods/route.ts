@@ -1,20 +1,58 @@
+import { NextResponse } from "next/server";
+
+interface Food {
+  foodId?: {};
+  foodName: string; // foodName bolgoj solih
+  price: number;
+  image?: string;
+  ingredients: string;
+  category?: {};
+  createdAt?: Date;
+  updated?: Date;
+}
+
+// const foods: Food[] = [];
+const foods = [
+  {
+    foodName: "Grilled Chicken cobb salad",
+    price: 10,
+    ingredients:
+      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+  },
+];
+
 export async function GET() {
-  return Response.json({ message: "Hello from GET Foods" });
+  const response = NextResponse.json({ data: foods }, { status: 200 });
+  response.headers.set("Access-Control-Allow-Origin", "*");
+  response.headers.set(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS"
+  );
+  response.headers.set(
+    "Access-Control-ALlow-Headers",
+    "Content-Type, Authorization"
+  );
+  return response;
 }
 
-export async function POST() {
-  return Response.json({ message: "Hello from POST Foods" });
+export async function POST(req: Request) {
+  const body = await req.json();
+  const { foodName, price, ingredients } = body;
+  foods.push({ foodName, price, ingredients });
+  // console.log({ foodName, price, ingredients });
+
+  const response = NextResponse.json({ data: foods });
+  response.headers.set(
+    "Access-Control-Allow-Origin",
+    "*" // Replace with your client's domain
+  );
+  response.headers.set(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS"
+  );
+  response.headers.set(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization"
+  );
+  return response;
 }
-// export const dynamic = "force-static";
-
-// export async function GET() {
-//   const res = await fetch("https://data.mongodb-api.com/...", {
-//     headers: {
-//       "Content-Type": "application/json",
-//       "API-Key": process.env.DATA_API_KEY,
-//     },
-//   });
-//   const data = await res.json();
-
-//   return Response.json({ data });
-// }

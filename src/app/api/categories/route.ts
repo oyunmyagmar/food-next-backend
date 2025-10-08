@@ -1,13 +1,21 @@
 import { NextResponse } from "next/server";
 
-let categories = [
+interface FoodCategory {
+  categoryId?: {};
+  categoryName: string;
+  createdAt?: Date;
+  updated?: Date;
+}
+
+// const categories: FoodCategory[] = [];
+const categories = [
   { categoryName: "Appetizers" },
   { categoryName: "Salads" },
   { categoryName: "Pizzas" },
 ];
 
 export async function GET() {
-  const response = NextResponse.json({ data: categories });
+  const response = NextResponse.json({ data: categories }, { status: 200 });
   response.headers.set(
     "Access-Control-Allow-Origin",
     "*" // Replace with your client's domain
@@ -26,8 +34,8 @@ export async function GET() {
 export async function POST(req: Request) {
   const body = await req.json();
   const { categoryName } = body;
-  categoryName.push();
-  console.log(categoryName);
+  categories.push({ categoryName });
+  // console.log(categoryName);
 
   const response = NextResponse.json({ data: categories });
   response.headers.set(
