@@ -37,7 +37,7 @@ export async function POST(req: Request) {
   categories.push({ categoryName });
   // console.log(categoryName);
 
-  const response = NextResponse.json({ data: categories });
+  const response = NextResponse.json({ data: categories }, { status: 200 });
   response.headers.set(
     "Access-Control-Allow-Origin",
     "*" // Replace with your client's domain
@@ -52,3 +52,24 @@ export async function POST(req: Request) {
   );
   return response;
 }
+
+// export async function DELETE(req: Request) {
+//   const body = await req.json();
+
+//   console.log({ body });
+
+//   const response = NextResponse.json({ data: categories }, { status: 200 });
+//   response.headers.set(
+//     "Access-Control-Allow-Origin",
+//     "*" // Replace with your client's domain
+//   );
+//   response.headers.set(
+//     "Access-Control-Allow-Methods",
+//     "GET, POST, PUT, DELETE, OPTIONS"
+//   );
+//   response.headers.set(
+//     "Access-Control-Allow-Headers",
+//     "Content-Type, Authorization"
+//   );
+//   return response;
+// }
