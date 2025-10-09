@@ -2,43 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { uploadImageToCloudinary } from "../../../../lib/utils/uploadImage";
 import { FoodType } from "../../../../lib/utils/types";
 
-// interface Food {
-//   foodId?: {};
-//   foodName: string; // foodName bolgoj solih
-//   price: number;
-//   image?: string;
-//   ingredients: string;
-//   category?: string;
-//   createdAt?: Date;
-//   updated?: Date;
-// }
-
+// tur zuur
 // const foods: Food[] = [];
-// const foods = [
-//   {
-//     foodName: "Grilled Chicken cobb salad",
-//     price: 10,
-//     ingredients:
-//       "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
-//   },
-// ];
+// tur zuur
 
 export async function GET() {
   return Response.json({ data: "Hello from Food" });
 }
-// export async function GET() {
-//   const response = NextResponse.json({ data: foods }, { status: 200 });
-//   response.headers.set("Access-Control-Allow-Origin", "*");
-//   response.headers.set(
-//     "Access-Control-Allow-Methods",
-//     "GET, POST, PUT, DELETE, OPTIONS"
-//   );
-//   response.headers.set(
-//     "Access-Control-ALlow-Headers",
-//     "Content-Type, Authorization"
-//   );
-//   return response;
-// }
 
 export async function POST(req: NextRequest) {
   try {
@@ -54,15 +24,15 @@ export async function POST(req: NextRequest) {
 
     // Console log the received data
     console.log("========== Received Food Data ==========");
-    console.log("FoodName:", foodName);
-    console.log("Price:", price);
-    console.log("Ingredients:", ingredients);
-    console.log("Category:", category);
+    console.log("foodName:", foodName);
+    console.log("price:", price);
+    console.log("ingredients:", ingredients);
+    console.log("category:", category);
     console.log(
-      "Image:",
+      "image:",
       image ? `${image.name} (${image.size} bytes)` : "No image"
     );
-    console.log("=======================================");
+    console.log("=========================================");
 
     // Validate required fields
     if (!foodName || !price || !ingredients || !category) {
@@ -129,3 +99,17 @@ export async function POST(req: NextRequest) {
 //   "Content-Type, Authorization"
 // );
 // return response;
+
+// export async function GET() {
+//   const response = NextResponse.json({ data: foods }, { status: 200 });
+//   response.headers.set("Access-Control-Allow-Origin", "*");
+//   response.headers.set(
+//     "Access-Control-Allow-Methods",
+//     "GET, POST, PUT, DELETE, OPTIONS"
+//   );
+//   response.headers.set(
+//     "Access-Control-ALlow-Headers",
+//     "Content-Type, Authorization"
+//   );
+//   return response;
+// }
