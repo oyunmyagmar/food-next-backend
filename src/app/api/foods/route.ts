@@ -5,36 +5,9 @@ import { FoodType } from "../../../../lib/utils/types";
 // tur zuur
 // const foods: Food[] = [];
 // tur zuur
-const dishes: FoodType[] = [
-  {
-    foodName: "Grilled Chicken cobb salad",
-    price: 10,
-    ingredients:
-      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
-    category: "Appetizers",
-  },
-  {
-    foodName: "Burrata Caprese",
-    price: 15,
-    ingredients:
-      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
-    category: "Salads",
-  },
-  {
-    foodName: "Betroot and orange salad",
-    price: 50,
-    ingredients:
-      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
-    category: "Pizzas",
-  },
-];
-
-// mock data
 
 export async function GET() {
-  const response = NextResponse.json({ data: dishes }, { status: 200 });
-
-  return response;
+  return Response.json({ data: "Hello from Food" });
 }
 
 export async function POST(req: NextRequest) {
