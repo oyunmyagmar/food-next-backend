@@ -33,15 +33,7 @@ const dishes: FoodType[] = [
 
 export async function GET() {
   const response = NextResponse.json({ data: dishes }, { status: 200 });
-  response.headers.set("Access-Control-Allow-Origin", "*");
-  response.headers.set(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, OPTIONS"
-  );
-  response.headers.set(
-    "Access-Control-ALlow-Headers",
-    "Content-Type, Authorization"
-  );
+
   return response;
 }
 
