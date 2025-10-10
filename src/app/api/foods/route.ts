@@ -5,9 +5,44 @@ import { FoodType } from "../../../../lib/utils/types";
 // tur zuur
 // const foods: Food[] = [];
 // tur zuur
+const dishes: FoodType[] = [
+  {
+    foodName: "Grilled Chicken cobb salad",
+    price: 10,
+    ingredients:
+      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+    category: "Appetizers",
+  },
+  {
+    foodName: "Burrata Caprese",
+    price: 15,
+    ingredients:
+      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+    category: "Salads",
+  },
+  {
+    foodName: "Betroot and orange salad",
+    price: 50,
+    ingredients:
+      "Fluffy pancakes stacked with fruits, cream, syrup, and powdered sugar.",
+    category: "Pizzas",
+  },
+];
+
+// mock data
 
 export async function GET() {
-  return Response.json({ data: "Hello from Food" });
+  const response = NextResponse.json({ data: dishes }, { status: 200 });
+  response.headers.set("Access-Control-Allow-Origin", "*");
+  response.headers.set(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS"
+  );
+  response.headers.set(
+    "Access-Control-ALlow-Headers",
+    "Content-Type, Authorization"
+  );
+  return response;
 }
 
 export async function POST(req: NextRequest) {
