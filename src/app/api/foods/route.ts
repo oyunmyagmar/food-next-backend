@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { uploadImageToCloudinary } from "../../../../lib/utils/uploadImage";
 import { FoodType } from "../../../../lib/utils/types";
-
-// tur zuur
-// const foods: Food[] = [];
-// tur zuur
+import { createFood, getAllFoods } from "../../../../lib/services/food-service";
 
 export async function GET() {
-  return Response.json({ data: "Hello from Food" });
+  let foods = await getAllFoods();
+  const response = NextResponse.json({ data: foods }, { status: 200 });
+  console.log("foods=====", foods, "=====foods");
+
+  return response;
 }
 
 export async function POST(req: NextRequest) {
@@ -32,7 +33,7 @@ export async function POST(req: NextRequest) {
       "image:",
       image ? `${image.name} (${image.size} bytes)` : "No image"
     );
-    console.log("=========================================");
+    console.log("========================================");
 
     // Validate required fields
     if (!foodName || !price || !ingredients || !category) {
@@ -57,6 +58,7 @@ export async function POST(req: NextRequest) {
       image: imageUrl,
     };
 
+    await createFood(foodData);
     console.log("Final Food Data:", foodData);
 
     // Return success response
