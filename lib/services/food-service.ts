@@ -13,3 +13,9 @@ export const getAllFoods = async () => {
   await connectDB();
   return await Food.find();
 };
+
+export const deleteFoodById = async (id: string) => {
+  await connectDB();
+  await Food.findByIdAndDelete(id);
+  return await Food.find();
+};

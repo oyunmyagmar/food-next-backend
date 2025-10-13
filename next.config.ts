@@ -13,11 +13,11 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: "http://localhost:3000", // Or '*'
+            value: "http://localhost:3001", // Or '*'
           },
           {
             key: "Access-Control-Allow-Methods",
-            value: "GET, POST, PUT, DELETE, OPTIONS",
+            value: "GET, POST, PUT, DELETE, OPTIONS, PATCH",
           },
           {
             key: "Access-Control-Allow-Headers",
