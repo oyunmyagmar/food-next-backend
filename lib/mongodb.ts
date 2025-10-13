@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+// query language for mongodb
 
 const MONGODB_URI = process.env.MONGODB_URL;
 

@@ -82,25 +82,6 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-// const body = await req.json();
-// const { foodName, price, ingredients } = body;
-// foods.push({ foodName, price, ingredients });
-// // console.log({ foodName, price, ingredients });
-
-// const response = NextResponse.json({ data: foods });
-// response.headers.set(
-//   "Access-Control-Allow-Origin",
-//   "*" // Replace with your client's domain
-// );
-// response.headers.set(
-//   "Access-Control-Allow-Methods",
-//   "GET, POST, PUT, DELETE, OPTIONS"
-// );
-// response.headers.set(
-//   "Access-Control-Allow-Headers",
-//   "Content-Type, Authorization"
-// );
-// return response;
 
 // export async function GET() {
 //   const response = NextResponse.json({ data: foods }, { status: 200 });

@@ -1,19 +1,19 @@
 import mongoose, { Schema } from "mongoose";
 
 type FoodSchemaType = {
-  name: string;
+  foodName: string;
   price: number;
   ingredients: string;
   category: string;
-  image: File;
+  image: string;
 };
 
 const FoodSchema = new Schema({
-  name: { type: String },
-  price: { type: Number },
-  ingredients: { type: String },
-  category: { type: String },
-  image: { type: String },
+  foodName: String,
+  price: Number,
+  ingredients: String,
+  category: String,
+  image: String,
 });
 
 export const Food =

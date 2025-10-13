@@ -4,7 +4,7 @@ import { Food } from "../models/Food";
 
 export const createFood = async (foodData: FoodType) => {
   await connectDB();
-  const newFood = new Food({ foodData });
+  const newFood = new Food({ ...foodData });
   await newFood.save();
   return newFood;
 };
