@@ -27,7 +27,7 @@ export async function PUT(
   console.log(body, "edited body suuld");
 
   let foods = await updateFoodById(id);
-  console.log("aditedFoods===", foods, "===editedFoods");
+  console.log("aditedFoods===", foods, "===edited`Foods");
 
   return NextResponse.json({ data: foods }, { status: 200 });
 }
