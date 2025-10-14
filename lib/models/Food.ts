@@ -1,10 +1,10 @@
 import mongoose, { Schema } from "mongoose";
+import { Category } from "./Category";
 
 type FoodSchemaType = {
   foodName: string;
   price: number;
   ingredients: string;
-  category: string;
   image: string;
 };
 
@@ -12,7 +12,6 @@ const FoodSchema = new Schema({
   foodName: String,
   price: Number,
   ingredients: String,
-  category: String,
   image: String,
 });
 

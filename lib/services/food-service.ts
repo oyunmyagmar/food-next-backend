@@ -19,3 +19,9 @@ export const deleteFoodById = async (id: string) => {
   await Food.findByIdAndDelete(id);
   return await Food.find();
 };
+
+export const updateFoodById = async (id: string) => {
+  await connectDB();
+  await Food.findOneAndUpdate({ id });
+  return await Food.find();
+};

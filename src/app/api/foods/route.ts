@@ -20,7 +20,6 @@ export async function POST(req: NextRequest) {
     const foodName = formData.get("foodName") as string;
     const price = formData.get("price") as string;
     const ingredients = formData.get("ingredients") as string;
-    const category = formData.get("category") as string;
     const image = formData.get("image") as File;
 
     // Console log the received data
@@ -28,7 +27,6 @@ export async function POST(req: NextRequest) {
     console.log("foodName:", foodName);
     console.log("price:", price);
     console.log("ingredients:", ingredients);
-    console.log("category:", category);
     console.log(
       "image:",
       image ? `${image.name} (${image.size} bytes)` : "No image"
@@ -36,7 +34,7 @@ export async function POST(req: NextRequest) {
     console.log("========================================");
 
     // Validate required fields
-    if (!foodName || !price || !ingredients || !category) {
+    if (!foodName || !price || !ingredients) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -54,7 +52,6 @@ export async function POST(req: NextRequest) {
       foodName,
       price: parseFloat(price),
       ingredients,
-      category,
       image: imageUrl,
     };
 
@@ -82,17 +79,3 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-
-// export async function GET() {
-//   const response = NextResponse.json({ data: foods }, { status: 200 });
-//   response.headers.set("Access-Control-Allow-Origin", "*");
-//   response.headers.set(
-//     "Access-Control-Allow-Methods",
-//     "GET, POST, PUT, DELETE, OPTIONS"
-//   );
-//   response.headers.set(
-//     "Access-Control-ALlow-Headers",
-//     "Content-Type, Authorization"
-//   );
-//   return response;
-// }
