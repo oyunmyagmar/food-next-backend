@@ -9,9 +9,10 @@ export const createFood = async (foodData: FoodType) => {
   return newFood;
 };
 
-export const getAllFoods = async () => {
+export const getAllFoods = async (): Promise<FoodType[]> => {
   await connectDB();
-  return await Food.find();
+  const allFoods: FoodType[] = await Food.find();
+  return allFoods;
 };
 
 export const deleteFoodById = async (id: string) => {

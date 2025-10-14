@@ -6,23 +6,20 @@ import { createFood, getAllFoods } from "../../../../lib/services/food-service";
 export async function GET() {
   let foods = await getAllFoods();
   const response = NextResponse.json({ data: foods }, { status: 200 });
-  console.log("foods=====", foods, "=====foods");
+  console.log("foods displayed=====", foods, "=====foods displayed");
 
   return response;
 }
 
 export async function POST(req: NextRequest) {
   try {
-    // Parse the formData from the request
     const formData = await req.formData();
 
-    // Extract food fields from formData
     const foodName = formData.get("foodName") as string;
     const price = formData.get("price") as string;
     const ingredients = formData.get("ingredients") as string;
     const image = formData.get("image") as File;
 
-    // Console log the received data
     console.log("========== Received Food Data ==========");
     console.log("foodName:", foodName);
     console.log("price:", price);
@@ -33,7 +30,6 @@ export async function POST(req: NextRequest) {
     );
     console.log("========================================");
 
-    // Validate required fields
     if (!foodName || !price || !ingredients) {
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -41,7 +37,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Handle image upload if image exists
     let imageUrl = "";
     if (image) {
       imageUrl = await uploadImageToCloudinary(image);
