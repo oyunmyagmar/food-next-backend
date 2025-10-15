@@ -10,7 +10,7 @@ export const createNewFood = async (newFoodData: newFoodType) => {
   return newNewFood;
 };
 
-export const getNewAllFoods = async () => {
+export const getAllNewFoods = async () => {
   await connectDB();
   Category;
   const newAllFoods: newFoodType[] = await NewFood.find().populate(

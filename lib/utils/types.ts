@@ -17,3 +17,8 @@ export type newFoodType = {
   categoryId: string;
   image?: string;
 };
+
+export type CategoryType = {
+  _id?: string;
+  name: string;
+};

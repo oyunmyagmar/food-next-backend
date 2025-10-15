@@ -6,7 +6,7 @@ import { createFood, getAllFoods } from "../../../../lib/services/food-service";
 export async function GET() {
   let foods = await getAllFoods();
   const response = NextResponse.json({ data: foods }, { status: 200 });
-  console.log("foods displayed=====", foods, "=====foods displayed");
+  console.log("AllFoods =====", foods, "===== AllFoods");
 
   return response;
 }

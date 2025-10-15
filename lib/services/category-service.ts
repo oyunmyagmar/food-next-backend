@@ -1,5 +1,7 @@
 import connectDB from "../mongodb";
 import { Category } from "../models/Category";
+import { CategoryType } from "../utils/types";
+import { NewFood } from "../models/NewFood";
 
 export const createCategory = async (name: string) => {
   await connectDB();
@@ -10,7 +12,8 @@ export const createCategory = async (name: string) => {
 
 export const getAllCategories = async () => {
   await connectDB();
-  return await Category.find();
+  const allCategories: CategoryType[] = await Category.find();
+  return allCategories;
 };
 
 export const deleteCategoryById = async (id: string) => {

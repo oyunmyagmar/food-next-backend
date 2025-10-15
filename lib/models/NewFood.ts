@@ -10,15 +10,15 @@ type NewFoodSchemaType = {
 
 const NewFoodSchema = new Schema(
   {
-    name: String,
-    price: Number,
-    ingredients: String,
+    name: { type: String, required: true },
+    price: { type: Number, required: true },
+    ingredients: { type: String, required: true },
     categoryId: {
       type: Schema.ObjectId,
       ref: "Category",
       required: true,
     },
-    image: String,
+    image: { type: String, required: true },
   },
   { timestamps: true }
 );
