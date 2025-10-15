@@ -9,7 +9,7 @@ export type FoodType = {
   updated?: Date;
 };
 
-export type newFoodType = {
+export type NewFoodType = {
   _id?: string;
   foodName: string;
   price: number;

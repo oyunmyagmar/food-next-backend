@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
   createNewFood,
+  editNewFood,
   getAllNewFoods,
 } from "../../../../lib/services/newfood-service";
 import { uploadImageToCloudinary } from "../../../../lib/utils/uploadImage";
-import { newFoodType } from "../../../../lib/utils/types";
+import { NewFoodType } from "../../../../lib/utils/types";
 
 export async function GET() {
   let newFoods = await getAllNewFoods();
@@ -47,7 +48,7 @@ export async function POST(request: NextRequest) {
       imageUrl = await uploadImageToCloudinary(image);
     }
 
-    const newFoodData: newFoodType = {
+    const newFoodData: NewFoodType = {
       foodName,
       price: parseFloat(price),
       ingredients,
@@ -72,6 +73,82 @@ export async function POST(request: NextRequest) {
       {
         success: false,
         error: "Failed to process new food data",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PUT(request: NextRequest) {
+  try {
+    const formEditedData = await request.formData();
+
+    const foodName = formEditedData.get("editedFoodName") as string;
+    const categoryId = formEditedData.get("editedCategorySelected") as string;
+    const ingredients = formEditedData.get("editedIngredients") as string;
+    const price = formEditedData.get("editedPrice") as string;
+    const image = formEditedData.get("editedImage") as File | string;
+    const foodId = formEditedData.get("printedFoodId") as string;
+
+    console.log("===== Received edited NEW Food Data Start =====");
+    console.log("foodName:", foodName);
+    console.log("categoryId", categoryId);
+    console.log("ingredients:", ingredients);
+    console.log("price:", price);
+    console.log("foodId", foodId);
+    if (!image) {
+      console.log("no image provided");
+    } else if (typeof image === "string") {
+      console.log("image:", `${image}`);
+    } else if (image instanceof File) {
+      console.log("image:", `${image.name} (${image.size} bytes)`);
+    } else {
+      console.log("unknown image type");
+    }
+    console.log("===== Received edited NEW Food Data End =====");
+
+    if (!foodName || !categoryId || !ingredients || !price) {
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 }
+      );
+    } else if (!foodId) {
+      return NextResponse.json({ error: "FoodId is missing" });
+    }
+
+    let imageUrl = "";
+    if (image instanceof File) {
+      imageUrl = await uploadImageToCloudinary(image);
+    } else if (typeof image === "string") {
+      imageUrl = image;
+    }
+
+    const newFoodData: NewFoodType = {
+      foodName,
+      categoryId,
+      ingredients,
+      price: parseFloat(price),
+      image: imageUrl,
+    };
+
+    await editNewFood(newFoodData, foodId);
+    console.log("Final Edited New Food Data:", newFoodData);
+
+    return NextResponse.json(
+      {
+        succes: true,
+        message: "New Food item received and image uploaded successfully",
+        data: newFoodData,
+      },
+      { status: 201 }
+    );
+  } catch (error) {
+    console.error("Error processing edited new food data:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Failed to process edited new food data",
         details: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 }

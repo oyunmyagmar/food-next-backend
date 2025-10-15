@@ -1,9 +1,9 @@
 import { Category } from "../models/Category";
 import { NewFood } from "../models/NewFood";
 import connectDB from "../mongodb";
-import { newFoodType } from "../utils/types";
+import { NewFoodType } from "../utils/types";
 
-export const createNewFood = async (newFoodData: newFoodType) => {
+export const createNewFood = async (newFoodData: NewFoodType) => {
   await connectDB();
   const newNewFood = new NewFood({ ...newFoodData });
   await newNewFood.save();
@@ -13,10 +13,29 @@ export const createNewFood = async (newFoodData: newFoodType) => {
 export const getAllNewFoods = async () => {
   await connectDB();
   Category;
-  const newAllFoods: newFoodType[] = await NewFood.find().populate(
+  const allNewFoods: NewFoodType[] = await NewFood.find().populate(
     "categoryId"
   );
-  return newAllFoods;
+  return allNewFoods;
 };
 
-export const deleteNewFoodByFoodId = ()xfoodId) = {});
+export const deleteNewFoodByFoodId = async (foodId: string) => {
+  await connectDB();
+  await NewFood.findByIdAndDelete(foodId);
+  return await NewFood.find();
+};
+
+export const editNewFood = async (
+  newFoodData: NewFoodType,
+  foodId: string
+): Promise<NewFoodType | string> => {
+  await connectDB();
+  const updatedFood = await NewFood.findByIdAndUpdate(
+    foodId,
+    {
+      ...newFoodData,
+    },
+    { new: true }
+  ).populate("categoryId");
+  return updatedFood;
+};
