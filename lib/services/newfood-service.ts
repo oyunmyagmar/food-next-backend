@@ -18,3 +18,5 @@ export const getAllNewFoods = async () => {
   );
   return newAllFoods;
 };
+
+export const deleteNewFoodByFoodId = ()xfoodId) = {});

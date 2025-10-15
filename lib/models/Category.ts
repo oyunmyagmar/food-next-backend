@@ -1,12 +1,12 @@
 import mongoose, { Schema } from "mongoose";
 
 type CategorySchemaType = {
-  name: string;
+  categoryName: string;
 };
 
 const CategorySchema = new Schema(
   {
-    name: { type: String, required: true },
+    categoryName: { type: String, required: true },
   },
   { timestamps: true }
 );

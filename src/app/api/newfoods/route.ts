@@ -18,14 +18,14 @@ export async function POST(request: NextRequest) {
   try {
     const formNewData = await request.formData();
 
-    const name = formNewData.get("name") as string;
+    const foodName = formNewData.get("foodName") as string;
     const price = formNewData.get("price") as string;
     const ingredients = formNewData.get("ingredients") as string;
     const categoryId = formNewData.get("selectedCategoryId") as string;
     const image = formNewData.get("image") as File;
 
     console.log("===== Received NEW Food Data Start =====");
-    console.log("name:", name);
+    console.log("foodName:", foodName);
     console.log("price:", price);
     console.log("ingredients:", ingredients);
     console.log("categoryId", categoryId);
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     );
     console.log("===== Received NEW Food Data End =====");
 
-    if (!name || !price || !ingredients || !categoryId) {
+    if (!foodName || !price || !ingredients || !categoryId) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
     }
 
     const newFoodData: newFoodType = {
-      name,
+      foodName,
       price: parseFloat(price),
       ingredients,
       categoryId,

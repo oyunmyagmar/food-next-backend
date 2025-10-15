@@ -1,23 +1,23 @@
 import mongoose, { Schema } from "mongoose";
 
 type NewFoodSchemaType = {
-  name: string;
+  foodName: string;
   price: number;
-  ingredients: string;
   categoryId: string;
+  ingredients: string;
   image: string;
 };
 
 const NewFoodSchema = new Schema(
   {
-    name: { type: String, required: true },
+    foodName: { type: String, required: true },
     price: { type: Number, required: true },
-    ingredients: { type: String, required: true },
     categoryId: {
       type: Schema.ObjectId,
       ref: "Category",
       required: true,
     },
+    ingredients: { type: String, required: true },
     image: { type: String, required: true },
   },
   { timestamps: true }

@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
 
   console.log("Received category:", body);
 
-  await createCategory(body.name);
+  await createCategory(body.categoryName);
 
   return new NextResponse(JSON.stringify({ message: "Category created!" }), {
     status: 200,

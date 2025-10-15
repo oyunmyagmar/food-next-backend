@@ -8,7 +8,11 @@ export async function DELETE(
   const { id } = params;
   let categories = await deleteCategoryById(id);
 
-  console.log("newCategories===", categories, "===newCategories");
+  console.log(
+    "newCategoriesAfterDeleted===",
+    categories,
+    "===newCategoriesAfterDeleted"
+  );
 
   return NextResponse.json({ data: categories }, { status: 200 });
 }

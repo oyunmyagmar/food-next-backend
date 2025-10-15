@@ -11,14 +11,14 @@ export type FoodType = {
 
 export type newFoodType = {
   _id?: string;
-  name: string;
+  foodName: string;
   price: number;
   ingredients: string;
   categoryId: string;
-  image?: string;
+  image: string;
 };
 
 export type CategoryType = {
   _id?: string;
-  name: string;
+  categoryName: string;
 };

@@ -3,9 +3,9 @@ import { Category } from "../models/Category";
 import { CategoryType } from "../utils/types";
 import { NewFood } from "../models/NewFood";
 
-export const createCategory = async (name: string) => {
+export const createCategory = async (categoryName: string) => {
   await connectDB();
-  const newCategory = new Category({ name });
+  const newCategory = new Category({ categoryName });
   await newCategory.save();
   return newCategory;
 };
