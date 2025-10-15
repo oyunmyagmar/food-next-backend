@@ -8,3 +8,12 @@ export type FoodType = {
   createdAt?: Date;
   updated?: Date;
 };
+
+export type newFoodType = {
+  _id?: string;
+  name: string;
+  price: number;
+  ingredients: string;
+  categoryId: string;
+  image?: string;
+};

@@ -7,6 +7,7 @@ import {
 export async function GET() {
   let categories = await getAllCategories();
   const response = NextResponse.json({ data: categories }, { status: 200 });
+  // console.log("ALL CATEGORIES ===", categories, "=== ALL CATEGORIES");
 
   return response;
 }

@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     const ingredients = formData.get("ingredients") as string;
     const image = formData.get("image") as File;
 
-    console.log("========== Received Food Data ==========");
+    console.log("==== Received Food Data ====");
     console.log("foodName:", foodName);
     console.log("price:", price);
     console.log("ingredients:", ingredients);
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
       "image:",
       image ? `${image.name} (${image.size} bytes)` : "No image"
     );
-    console.log("========================================");
+    console.log("==== Received Food Data ====");
 
     if (!foodName || !price || !ingredients) {
       return NextResponse.json(
@@ -42,7 +42,6 @@ export async function POST(req: NextRequest) {
       imageUrl = await uploadImageToCloudinary(image);
     }
 
-    // Prepare the food data object
     const foodData: FoodType = {
       foodName,
       price: parseFloat(price),
@@ -53,7 +52,6 @@ export async function POST(req: NextRequest) {
     await createFood(foodData);
     console.log("Final Food Data:", foodData);
 
-    // Return success response
     return NextResponse.json(
       {
         success: true,

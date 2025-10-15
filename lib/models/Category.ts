@@ -4,7 +4,7 @@ type CategorySchemaType = {
   name: string;
 };
 
-const CategorySchema = new Schema({ name: String });
+const CategorySchema = new Schema({ name: String }, { timestamps: true });
 
 export const Category =
   mongoose.models.Category ||
