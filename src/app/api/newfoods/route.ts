@@ -89,7 +89,7 @@ export async function PUT(request: NextRequest) {
     const ingredients = formEditedData.get("editedIngredients") as string;
     const price = formEditedData.get("editedPrice") as string;
     const image = formEditedData.get("editedImage") as File | string;
-    const foodId = formEditedData.get("printedFoodId") as string;
+    const foodId = formEditedData.get("selectedFoodId") as string;
 
     console.log("===== Received edited NEW Food Data Start =====");
     console.log("foodName:", foodName);
