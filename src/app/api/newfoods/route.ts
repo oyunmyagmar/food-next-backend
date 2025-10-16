@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     const foodName = formNewData.get("foodName") as string;
     const price = formNewData.get("price") as string;
     const ingredients = formNewData.get("ingredients") as string;
-    const categoryId = formNewData.get("selectedCategoryId") as string;
+    const categoryId = formNewData.get("categoryId") as string;
     const image = formNewData.get("image") as File;
 
     console.log("===== Received NEW Food Data Start =====");
