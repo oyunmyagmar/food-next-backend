@@ -12,21 +12,10 @@ export const createCategory = async (categoryName: string) => {
 
 export const getAllCategories = async () => {
   await connectDB();
-  const allCategories = await Category.find().select({ __v: 0 }).lean();
-
-  const finalCategories = [];
-
-  for (let i = 0; i < allCategories.length; i++) {
-    const { _id } = allCategories[i];
-
-    const foods: NewFoodType[] = await NewFood.find({ categoryId: _id });
-
-    if (foods.length > 0) {
-      finalCategories.push({ ...allCategories[i], foods });
-    }
-  }
-
-  return finalCategories;
+  const allCategories: CategoryType[] = await Category.find().select({
+    __v: 0,
+  });
+  return allCategories;
 };
 
 export const deleteCategoryById = async (id: string) => {
@@ -34,3 +23,22 @@ export const deleteCategoryById = async (id: string) => {
   await Category.findByIdAndDelete(id);
   return await Category.find();
 };
+
+// export const getAllCategories = async () => {
+//   await connectDB();
+//   const allCategories = await Category.find().select({ __v: 0 }).lean();
+
+//   const finalCategories = [];
+
+//   for (let i = 0; i < allCategories.length; i++) {
+//     const { _id } = allCategories[i];
+
+//     const foods: NewFoodType[] = await NewFood.find({ categoryId: _id });
+
+//     if (foods.length > 0) {
+//       finalCategories.push({ ...allCategories[i], foods });
+//     }
+//   }
+
+//   return finalCategories;
+// };

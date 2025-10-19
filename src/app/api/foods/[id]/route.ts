@@ -1,8 +1,5 @@
+import { deleteFoodById, updateFoodById } from "@/lib/services/food-service";
 import { NextRequest, NextResponse } from "next/server";
-import {
-  deleteFoodById,
-  updateFoodById,
-} from "../../../../../lib/services/food-service";
 
 export async function DELETE(
   request: NextRequest,

@@ -1,8 +1,8 @@
+import { NextRequest, NextResponse } from "next/server";
 import {
   createCategory,
   getAllCategories,
 } from "@/lib/services/category-service";
-import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
   let categories = await getAllCategories();

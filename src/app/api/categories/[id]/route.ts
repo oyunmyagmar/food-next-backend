@@ -1,5 +1,5 @@
+import { deleteCategoryById } from "@/lib/services/category-service";
 import { NextRequest, NextResponse } from "next/server";
-import { deleteCategoryById } from "../../../../../lib/services/category-service";
 
 export async function DELETE(
   request: NextRequest,
