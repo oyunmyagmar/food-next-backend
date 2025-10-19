@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
 import {
   createNewFood,
   editNewFood,
   getAllNewFoods,
-} from "../../../../lib/services/newfood-service";
-import { uploadImageToCloudinary } from "../../../../lib/utils/uploadImage";
-import { NewFoodType } from "../../../../lib/utils/types";
+} from "@/lib/services/newfood-service";
+import { NewFoodType } from "@/lib/utils/types";
+import { uploadImageToCloudinary } from "@/lib/utils/uploadImage";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
   let newFoods = await getAllNewFoods();

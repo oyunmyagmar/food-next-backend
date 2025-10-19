@@ -21,4 +21,10 @@ export type NewFoodType = {
 export type CategoryType = {
   _id?: string;
   categoryName: string;
+  foods: NewFoodType[];
 };
+
+// export type CategoryType = {
+//   _id?: string;
+//   categoryName: string;
+// };

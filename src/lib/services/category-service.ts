@@ -1,6 +1,6 @@
 import connectDB from "../mongodb";
 import { Category } from "../models/Category";
-import { CategoryType } from "../utils/types";
+import { CategoryType, NewFoodType } from "../utils/types";
 import { NewFood } from "../models/NewFood";
 
 export const createCategory = async (categoryName: string) => {
@@ -12,8 +12,21 @@ export const createCategory = async (categoryName: string) => {
 
 export const getAllCategories = async () => {
   await connectDB();
-  const allCategories: CategoryType[] = await Category.find();
-  return allCategories;
+  const allCategories = await Category.find().select({ __v: 0 }).lean();
+
+  const finalCategories = [];
+
+  for (let i = 0; i < allCategories.length; i++) {
+    const { _id } = allCategories[i];
+
+    const foods: NewFoodType[] = await NewFood.find({ categoryId: _id });
+
+    if (foods.length > 0) {
+      finalCategories.push({ ...allCategories[i], foods });
+    }
+  }
+
+  return finalCategories;
 };
 
 export const deleteCategoryById = async (id: string) => {

@@ -8,7 +8,7 @@ const CategorySchema = new Schema(
   {
     categoryName: { type: String, required: true },
   },
-  { timestamps: true }
+  { timestamps: true, versionKey: false }
 );
 
 export const Category =

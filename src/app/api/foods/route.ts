@@ -1,7 +1,7 @@
+import { createFood, getAllFoods } from "@/lib/services/food-service";
+import { FoodType } from "@/lib/utils/types";
+import { uploadImageToCloudinary } from "@/lib/utils/uploadImage";
 import { NextRequest, NextResponse } from "next/server";
-import { uploadImageToCloudinary } from "../../../../lib/utils/uploadImage";
-import { FoodType } from "../../../../lib/utils/types";
-import { createFood, getAllFoods } from "../../../../lib/services/food-service";
 
 export async function GET() {
   let foods = await getAllFoods();

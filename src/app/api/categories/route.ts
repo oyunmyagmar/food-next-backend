@@ -1,13 +1,13 @@
-import { NextRequest, NextResponse } from "next/server";
 import {
   createCategory,
   getAllCategories,
-} from "../../../../lib/services/category-service";
+} from "@/lib/services/category-service";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
   let categories = await getAllCategories();
   const response = NextResponse.json({ data: categories }, { status: 200 });
-  // console.log("ALL CATEGORIES ===", categories, "=== ALL CATEGORIES");
+  console.log("ALL CATEGORIES ===", categories, "=== ALL CATEGORIES");
 
   return response;
 }
