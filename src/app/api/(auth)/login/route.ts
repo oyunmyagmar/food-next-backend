@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { User } from "@/lib/models/User";
 
 export async function POST(request: NextRequest) {
@@ -10,13 +10,12 @@ export async function POST(request: NextRequest) {
   const { email, password } = body;
 
   const registeredUser = await User.findOne({ email });
-  console.log(registeredUser, "registeredUser");
 
-  const hashPassword = registeredUser?.password;
-  console.log(hashPassword, "hashPassword");
+  console.log({ registeredUser });
 
-  const isVerified = bcrypt.compareSync(password, hashPassword);
-  console.log(isVerified, "isVerified");
+  const isVerified = bcrypt.compareSync(password, registeredUser.password);
+
+  console.log({ isVerified });
   if (isVerified) {
     return NextResponse.json({ message: "Login successfull" });
   } else {
