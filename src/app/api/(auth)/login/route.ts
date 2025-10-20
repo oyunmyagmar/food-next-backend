@@ -10,16 +10,16 @@ export async function POST(request: NextRequest) {
   const { email, password } = body;
 
   const registeredUser = await User.findOne({ email });
-  console.log(registeredUser, "bga");
+  console.log(registeredUser, "registeredUser");
 
-  const hashPassword = registeredUser.password;
-  console.log(hashPassword, "hash pass ");
-  // pass shalgah
-  const isVerified = bcrypt.compareSync(hashPassword, password);
-  console.log(isVerified, "isvery");
-  if (isVerified == true) {
-    return NextResponse.json({ message: "bga" });
+  const hashPassword = registeredUser?.password;
+  console.log(hashPassword, "hashPassword");
+
+  const isVerified = bcrypt.compareSync(password, hashPassword);
+  console.log(isVerified, "isVerified");
+  if (isVerified) {
+    return NextResponse.json({ message: "Login successfull" });
   } else {
-    return NextResponse.json({ message: "bhgui" });
+    return NextResponse.json({ message: "Incorrect password" });
   }
 }
