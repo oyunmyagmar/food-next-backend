@@ -4,21 +4,47 @@ import bcrypt from "bcryptjs";
 import { User } from "@/lib/models/User";
 
 export async function POST(request: NextRequest) {
-  await connectDB();
-  const body = await request.json();
+  try {
+    await connectDB();
+    const body = await request.json();
+    const { email, password } = body;
 
-  const { email, password } = body;
+    const registeredUser = await User.findOne({ email });
+    console.log({ registeredUser });
+    if (!registeredUser) {
+      return NextResponse.json(
+        { succes: false, message: "Invalid email. Please try again" },
+        { status: 401 }
+      );
+    }
 
-  const registeredUser = await User.findOne({ email });
-
-  console.log({ registeredUser });
-
-  const isVerified = bcrypt.compareSync(password, registeredUser.password);
-
-  console.log({ isVerified });
-  if (isVerified) {
-    return NextResponse.json({ message: "Login successfull" });
-  } else {
-    return NextResponse.json({ message: "Incorrect password" });
+    const isVerified = bcrypt.compareSync(password, registeredUser.password);
+    if (!isVerified) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Incorrect password. Please try again",
+        },
+        { status: 400 }
+      );
+    } else {
+      return NextResponse.json(
+        {
+          success: true,
+          message: "Login successful! Welcome back.",
+        },
+        { status: 200 }
+      );
+    }
+  } catch (error) {
+    console.error(error, "error");
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Login request failed.",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 }
+    );
   }
 }

@@ -4,29 +4,44 @@ import bcrypt from "bcryptjs";
 import { User } from "@/lib/models/User";
 
 export async function POST(request: NextRequest) {
-  await connectDB();
+  try {
+    await connectDB();
+    const body = await request.json();
+    const { email, password } = body;
 
-  const body = await request.json();
-  const { email, password } = body;
+    const registeredUser = await User.findOne({ email: email });
+    if (registeredUser) {
+      return NextResponse.json(
+        { error: "That email address is already in use" },
+        { status: 409 }
+      );
+    }
 
-  const hashPassword = bcrypt.hashSync(password, 10);
+    const hashPassword = bcrypt.hashSync(password, 10);
 
-  console.log(password, "pass");
-  console.log(hashPassword, "hash");
+    const newUser = await User.create({
+      email: email,
+      password: hashPassword,
+      role: "USER",
+    });
 
-  const user = await User.create({
-    email: email,
-    password: hashPassword,
-    role: "USER",
-  });
-
-  if ((await User.findOne({ email })) === email) {
-    console.log("butgeltei");
+    return NextResponse.json(
+      {
+        success: true,
+        message: "User created successfully!",
+        data: newUser,
+      },
+      { status: 201 }
+    );
+  } catch (error) {
+    console.error(error, "error");
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Signup request failed",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 }
+    );
   }
-  // email burtgeltei eseh?
-
-  return NextResponse.json(
-    { message: "Successfully created user", user },
-    { status: 200 }
-  );
 }
