@@ -18,11 +18,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // status code 200 yavulad errorCode bichih frontend der errorCode - oo console.log esvel alert() shud harah
     const isVerified = bcrypt.compareSync(password, registeredUser.password);
     if (!isVerified) {
       return NextResponse.json(
         {
           success: false,
+          erroCode: "INVALID_PASS",
           message: "Incorrect password. Please try again",
         },
         { status: 400 }
