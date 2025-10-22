@@ -6,6 +6,7 @@ import {
 } from "@/lib/services/newfood-service";
 import { NewFoodType } from "@/lib/utils/types";
 import { uploadImageToCloudinary } from "@/lib/utils/uploadImage";
+type Params = Promise<{ id: string }>;
 
 export async function GET() {
   let newFoods = await getAllNewFoods();
