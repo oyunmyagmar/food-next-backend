@@ -1,9 +1,16 @@
+import { createOrder } from "@/lib/services/order-service";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
-  const data = await request.json();
+  const body = await request.json();
+  const { cartFoods, cartItemsTotalPrice } = body;
 
-  console.log(data);
+  console.log(cartFoods, "===cartFoods===");
+  console.log(cartItemsTotalPrice, "===cartItemsTotalPrice===");
 
-  return NextResponse.json({ message: "success" });
+  await createOrder({ cartFoods, cartItemsTotalPrice });
+
+  return new NextResponse(JSON.stringify({ message: "Order created" }), {
+    status: 200,
+  });
 }

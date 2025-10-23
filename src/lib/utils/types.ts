@@ -28,3 +28,8 @@ export type CategoryType = {
   _id?: string;
   categoryName: string;
 };
+
+export type OrderItemType = {
+  food: NewFoodType;
+  quantity: number;
+};

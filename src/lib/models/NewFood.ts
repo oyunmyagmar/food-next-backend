@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-type NewFoodSchemaType = {
+export type NewFoodSchemaType = {
   foodName: string;
   price: number;
   categoryId: string;
@@ -8,7 +8,7 @@ type NewFoodSchemaType = {
   image: string;
 };
 
-const NewFoodSchema = new Schema(
+export const NewFoodSchema = new Schema(
   {
     foodName: { type: String, required: true },
     price: { type: Number, required: true },
