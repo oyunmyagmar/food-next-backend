@@ -1,4 +1,5 @@
-import { Order } from "../models/Order";
+import { Order, OrderSchemaType } from "../models/Order";
+import { User } from "../models/User";
 import connectDB from "../mongodb";
 import { OrderItemType } from "../utils/types";
 
@@ -11,10 +12,18 @@ export const createOrder = async ({
 }) => {
   await connectDB();
   const newOrder = new Order({
-    foodOrderItems: cartFoods,
     totalPrice: cartItemsTotalPrice,
+    foodOrderItems: cartFoods,
     status: "PENDING",
   });
   await newOrder.save();
   return newOrder;
 };
+
+export const getAllOrders = async () => {
+  await connectDB();
+  // User;
+  const orders: OrderSchemaType[] = await Order.find();
+  return orders;
+};
+// .populate("user")

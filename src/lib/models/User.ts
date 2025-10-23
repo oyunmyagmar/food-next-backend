@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-type UserSchemaType = {
+export type UserSchemaType = {
   email: string;
   password: string;
   phonenumber: string;
@@ -9,7 +9,7 @@ type UserSchemaType = {
   isVerified: boolean;
 };
 
-const UserSchema = new Schema(
+export const UserSchema = new Schema(
   {
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },

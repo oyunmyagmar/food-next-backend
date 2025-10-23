@@ -1,5 +1,13 @@
-import { createOrder } from "@/lib/services/order-service";
+import { createOrder, getAllOrders } from "@/lib/services/order-service";
 import { NextRequest, NextResponse } from "next/server";
+
+export async function GET() {
+  let orders = await getAllOrders();
+  const response = NextResponse.json({ data: orders }, { status: 200 });
+  console.log("+++++ALL ORDERS", orders, "ALL ORDERS+++++");
+
+  return response;
+}
 
 export async function POST(request: NextRequest) {
   const body = await request.json();

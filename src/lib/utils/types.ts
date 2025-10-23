@@ -30,6 +30,7 @@ export type CategoryType = {
 };
 
 export type OrderItemType = {
+  _id?: string;
   food: NewFoodType;
   quantity: number;
 };

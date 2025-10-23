@@ -7,3 +7,8 @@ export const createUser = async (email: string, password: string) => {
   await newUser.save();
   return newUser;
 };
+
+export const editUser = async (email: string, address: string) => {
+  await connectDB();
+  // const updateUser = await User.findOneAndUpdate(email,)
+};

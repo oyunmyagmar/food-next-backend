@@ -1,22 +1,29 @@
 import mongoose, { Schema } from "mongoose";
 import { NewFoodSchema, NewFoodSchemaType } from "./NewFood";
+import { UserSchemaType } from "./User";
 
-type OrderSchemaType = {
+export type OrderSchemaType = {
+  // user: UserSchemaType;
   totalPrice: number;
   foodOrderItems: {
-    quantity: number;
     food: NewFoodSchemaType;
+    quantity: number;
   }[];
   status: string;
 };
 
 const FoodOrderItem = new Schema({
-  quantity: Number,
   food: NewFoodSchema,
+  quantity: Number,
 });
 
-const OrderSchema = new Schema(
+export const OrderSchema = new Schema(
   {
+    // user: {
+    //   type: Schema.ObjectId,
+    //   ref: "User",
+    //   required: true,
+    // },
     totalPrice: { type: Number, required: true },
     foodOrderItems: { type: [FoodOrderItem], required: true },
     status: {
