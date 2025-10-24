@@ -10,6 +10,7 @@ export async function POST(request: NextRequest) {
     const { email, password } = body;
 
     const registeredUser = await User.findOne({ email });
+
     console.log({ registeredUser });
     if (!registeredUser) {
       return NextResponse.json(
@@ -34,6 +35,7 @@ export async function POST(request: NextRequest) {
         {
           success: true,
           message: "Login successful! Welcome back.",
+          user: registeredUser,
         },
         { status: 200 }
       );

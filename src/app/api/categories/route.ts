@@ -7,7 +7,7 @@ import {
 export async function GET() {
   let categories = await getAllCategories();
   const response = NextResponse.json({ data: categories }, { status: 200 });
-  console.log("ALL CATEGORIES ===", categories, "=== ALL CATEGORIES");
+  // console.log("ALL CATEGORIES ===", categories, "=== ALL CATEGORIES");
 
   return response;
 }
@@ -15,7 +15,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   const body = await request.json();
 
-  console.log("Received category:", body);
+  // console.log("Received category:", body);
 
   await createCategory(body.categoryName);
 

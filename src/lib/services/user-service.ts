@@ -1,4 +1,4 @@
-import { User } from "../models/User";
+import { User, UserSchemaType } from "../models/User";
 import connectDB from "../mongodb";
 
 export const createUser = async (email: string, password: string) => {
@@ -8,7 +8,14 @@ export const createUser = async (email: string, password: string) => {
   return newUser;
 };
 
-export const editUser = async (email: string, address: string) => {
+export const updateUser = async (id: string, address: string) => {
   await connectDB();
-  // const updateUser = await User.findOneAndUpdate(email,)
+  const updateUser = await User.findByIdAndUpdate(id, { address });
+  return updateUser;
+};
+
+export const getAllUsers = async () => {
+  await connectDB();
+  const allUsers: UserSchemaType[] = await User.find();
+  return allUsers;
 };

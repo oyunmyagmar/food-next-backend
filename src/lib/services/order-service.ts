@@ -4,14 +4,17 @@ import connectDB from "../mongodb";
 import { OrderItemType } from "../utils/types";
 
 export const createOrder = async ({
-  cartFoods,
+  user,
   cartItemsTotalPrice,
+  cartFoods,
 }: {
-  cartFoods: OrderItemType[];
+  user: string;
   cartItemsTotalPrice: number;
+  cartFoods: OrderItemType[];
 }) => {
   await connectDB();
   const newOrder = new Order({
+    user,
     totalPrice: cartItemsTotalPrice,
     foodOrderItems: cartFoods,
     status: "PENDING",
@@ -22,8 +25,7 @@ export const createOrder = async ({
 
 export const getAllOrders = async () => {
   await connectDB();
-  // User;
-  const orders: OrderSchemaType[] = await Order.find();
+  User;
+  const orders: OrderSchemaType[] = await Order.find().populate("id");
   return orders;
 };
-// .populate("user")

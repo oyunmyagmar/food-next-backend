@@ -3,7 +3,7 @@ import { NewFoodSchema, NewFoodSchemaType } from "./NewFood";
 import { UserSchemaType } from "./User";
 
 export type OrderSchemaType = {
-  // user: UserSchemaType;
+  user: string;
   totalPrice: number;
   foodOrderItems: {
     food: NewFoodSchemaType;
@@ -19,11 +19,11 @@ const FoodOrderItem = new Schema({
 
 export const OrderSchema = new Schema(
   {
-    // user: {
-    //   type: Schema.ObjectId,
-    //   ref: "User",
-    //   required: true,
-    // },
+    user: {
+      type: Schema.ObjectId,
+      ref: "User",
+      required: true,
+    },
     totalPrice: { type: Number, required: true },
     foodOrderItems: { type: [FoodOrderItem], required: true },
     status: {

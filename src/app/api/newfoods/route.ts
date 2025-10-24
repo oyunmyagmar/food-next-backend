@@ -10,7 +10,7 @@ import { uploadImageToCloudinary } from "@/lib/utils/uploadImage";
 export async function GET() {
   let newFoods = await getAllNewFoods();
   const response = NextResponse.json({ data: newFoods }, { status: 200 });
-  console.log("ALLNEWFOODS =====", newFoods, "===== ALLNEWFOODS");
+  // console.log("ALLNEWFOODS =====", newFoods, "===== ALLNEWFOODS");
 
   return response;
 }
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
       "image:",
       image ? `${image.name} (${image.size} bytes)` : "No image"
     );
-    console.log("===== Received NEW Food Data End =====");
+    // console.log("===== Received NEW Food Data End =====");
 
     if (!foodName || !price || !ingredients || !categoryId) {
       return NextResponse.json(
@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
     };
 
     await createNewFood(newFoodData);
-    console.log("Final NEW Food Data:", newFoodData);
+    // console.log("Final NEW Food Data:", newFoodData);
 
     return NextResponse.json(
       {
@@ -106,7 +106,7 @@ export async function PUT(request: NextRequest) {
     } else {
       console.log("unknown image type");
     }
-    console.log("===== Received edited NEW Food Data End =====");
+    // console.log("===== Received edited NEW Food Data End =====");
 
     if (!foodName || !categoryId || !ingredients || !price) {
       return NextResponse.json(
@@ -133,7 +133,7 @@ export async function PUT(request: NextRequest) {
     };
 
     await editNewFood(newFoodData, foodId);
-    console.log("Final Edited New Food Data:", newFoodData);
+    // console.log("Final Edited New Food Data:", newFoodData);
 
     return NextResponse.json(
       {

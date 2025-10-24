@@ -1,4 +1,5 @@
 import { createOrder, getAllOrders } from "@/lib/services/order-service";
+import { updateUser } from "@/lib/services/user-service";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET() {
@@ -11,12 +12,16 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { cartFoods, cartItemsTotalPrice } = body;
+  const { id, cartItemsTotalPrice, cartFoods, address } = body;
 
-  console.log(cartFoods, "===cartFoods===");
+  console.log(id, "===id===");
   console.log(cartItemsTotalPrice, "===cartItemsTotalPrice===");
+  console.log(cartFoods, "===cartFoods===");
+  console.log(address, "===address===");
 
-  await createOrder({ cartFoods, cartItemsTotalPrice });
+  await createOrder({ user: id, cartFoods, cartItemsTotalPrice });
+
+  await updateUser(id, address);
 
   return new NextResponse(JSON.stringify({ message: "Order created" }), {
     status: 200,
