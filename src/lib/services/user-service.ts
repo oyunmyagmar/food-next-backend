@@ -8,9 +8,9 @@ export const createUser = async (email: string, password: string) => {
   return newUser;
 };
 
-export const updateUser = async (id: string, address: string) => {
+export const updateUser = async (userId: string, address: string) => {
   await connectDB();
-  const updateUser = await User.findByIdAndUpdate(id, { address });
+  const updateUser = await User.findByIdAndUpdate(userId, { address });
   return updateUser;
 };
 

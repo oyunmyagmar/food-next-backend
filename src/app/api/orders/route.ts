@@ -12,16 +12,16 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { id, cartItemsTotalPrice, cartFoods, address } = body;
+  const { userId, cartItemsTotalPrice, cartFoods, address } = body;
 
-  console.log(id, "===id===");
+  console.log(userId, "===userId===");
   console.log(cartItemsTotalPrice, "===cartItemsTotalPrice===");
   console.log(cartFoods, "===cartFoods===");
   console.log(address, "===address===");
 
-  await createOrder({ user: id, cartFoods, cartItemsTotalPrice });
+  await createOrder({ userId, cartFoods, cartItemsTotalPrice });
 
-  await updateUser(id, address);
+  await updateUser(userId, address);
 
   return new NextResponse(JSON.stringify({ message: "Order created" }), {
     status: 200,
