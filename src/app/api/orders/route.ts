@@ -11,19 +11,37 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-  const body = await request.json();
-  const { userId, cartItemsTotalPrice, cartFoods, address } = body;
+  try {
+    const body = await request.json();
+    const { userId, cartItemsTotalPrice, cartFoods, address } = body;
 
-  console.log(userId, "===userId===");
-  console.log(cartItemsTotalPrice, "===cartItemsTotalPrice===");
-  console.log(cartFoods, "===cartFoods===");
-  console.log(address, "===address===");
+    console.log(userId, "===userId===");
+    console.log(cartItemsTotalPrice, "===cartItemsTotalPrice===");
+    console.log(cartFoods, "===cartFoods===");
+    console.log(address, "===address===");
 
-  await createOrder({ userId, cartFoods, cartItemsTotalPrice });
+    await createOrder({ userId, cartFoods, cartItemsTotalPrice });
 
-  await updateUser(userId, address);
+    await updateUser(userId, address);
 
-  return new NextResponse(JSON.stringify({ message: "Order created" }), {
-    status: 200,
-  });
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Order has been successfully placed !",
+      },
+      {
+        status: 201,
+      }
+    );
+  } catch (error) {
+    console.error("Error processing order data", error);
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Failed to process order data",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 }
+    );
+  }
 }
