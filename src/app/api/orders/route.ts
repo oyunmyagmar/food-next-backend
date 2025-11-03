@@ -15,30 +15,29 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { userId, cartItemsTotalPrice, cartFoods, address } = body;
 
-    console.log(userId, "===userId===");
-    console.log(cartItemsTotalPrice, "===cartItemsTotalPrice===");
-    console.log(cartFoods, "===cartFoods===");
-    console.log(address, "===address===");
+    console.log("==userId==", userId, "==userId==");
+    console.log(
+      "==cartItemsTotalPrice==",
+      cartItemsTotalPrice,
+      "==cartItemsTotalPrice=="
+    );
+    console.log("==cartFoods==", cartFoods, "==cartFoods==");
+    console.log("==address==", address, "==address==");
 
     await createOrder({ userId, cartFoods, cartItemsTotalPrice });
 
     await updateUser(userId, address);
 
-    return NextResponse.json(
-      {
-        success: true,
-        message: "Order has been successfully placed !",
-      },
-      {
-        status: 201,
-      }
-    );
+    return NextResponse.json({
+      success: true,
+      message: "Data received successfully",
+    });
   } catch (error) {
-    console.error("Error processing order data", error);
+    console.error("Error processing data", error);
     return NextResponse.json(
       {
         success: false,
-        error: "Failed to process order data",
+        error: "Internel Server Error",
         details: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 }
