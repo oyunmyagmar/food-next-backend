@@ -9,11 +9,5 @@ export async function DELETE(
   const { foodId } = await params;
   let newfoods = await deleteNewFoodByFoodId(foodId);
 
-  // console.log(
-  //   "newFoods AfterDeleted====",
-  //   newfoods,
-  //   "====ewFoods AfterDeleted"
-  // );
-
   return NextResponse.json({ data: newfoods }, { status: 200 });
 }

@@ -10,7 +10,6 @@ import { uploadImageToCloudinary } from "@/lib/utils/uploadImage";
 export async function GET() {
   let newFoods = await getAllNewFoods();
   const response = NextResponse.json({ data: newFoods }, { status: 200 });
-  // console.log("ALLNEWFOODS =====", newFoods, "===== ALLNEWFOODS");
 
   return response;
 }
@@ -24,17 +23,6 @@ export async function POST(request: NextRequest) {
     const ingredients = formNewData.get("ingredients") as string;
     const categoryId = formNewData.get("categoryId") as string;
     const image = formNewData.get("image") as File;
-
-    console.log("===== Received NEW Food Data Start =====");
-    console.log("foodName:", foodName);
-    console.log("price:", price);
-    console.log("ingredients:", ingredients);
-    console.log("categoryId", categoryId);
-    console.log(
-      "image:",
-      image ? `${image.name} (${image.size} bytes)` : "No image"
-    );
-    // console.log("===== Received NEW Food Data End =====");
 
     if (!foodName || !price || !ingredients || !categoryId) {
       return NextResponse.json(
@@ -57,7 +45,6 @@ export async function POST(request: NextRequest) {
     };
 
     await createNewFood(newFoodData);
-    // console.log("Final NEW Food Data:", newFoodData);
 
     return NextResponse.json(
       {
@@ -91,22 +78,15 @@ export async function PUT(request: NextRequest) {
     const image = formEditedData.get("editedImage") as File | string;
     const foodId = formEditedData.get("selectedFoodId") as string;
 
-    console.log("===== Received edited NEW Food Data Start =====");
-    console.log("foodName:", foodName);
-    console.log("categoryId", categoryId);
-    console.log("ingredients:", ingredients);
-    console.log("price:", price);
-    console.log("foodId", foodId);
-    if (!image) {
-      console.log("no image provided");
-    } else if (typeof image === "string") {
-      console.log("image:", `${image}`);
-    } else if (image instanceof File) {
-      console.log("image:", `${image.name} (${image.size} bytes)`);
-    } else {
-      console.log("unknown image type");
-    }
-    // console.log("===== Received edited NEW Food Data End =====");
+    // if (!image) {
+    //   console.log("no image provided");
+    // } else if (typeof image === "string") {
+    //   console.log("image:", `${image}`);
+    // } else if (image instanceof File) {
+    //   console.log("image:", `${image.name} (${image.size} bytes)`);
+    // } else {
+    //   console.log("unknown image type");
+    // }
 
     if (!foodName || !categoryId || !ingredients || !price) {
       return NextResponse.json(
@@ -133,7 +113,6 @@ export async function PUT(request: NextRequest) {
     };
 
     await editNewFood(newFoodData, foodId);
-    // console.log("Final Edited New Food Data:", newFoodData);
 
     return NextResponse.json(
       {

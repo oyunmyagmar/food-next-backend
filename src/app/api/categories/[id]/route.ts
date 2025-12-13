@@ -9,11 +9,5 @@ export async function DELETE(
   const { id } = await params;
   let categories = await deleteCategoryById(id);
 
-  // console.log(
-  //   "newCategoriesAfterDeleted===",
-  //   categories,
-  //   "===newCategoriesAfterDeleted"
-  // );
-
   return NextResponse.json({ data: categories }, { status: 200 });
 }
