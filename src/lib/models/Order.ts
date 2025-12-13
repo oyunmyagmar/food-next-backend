@@ -1,6 +1,5 @@
 import mongoose, { Schema } from "mongoose";
 import { NewFoodSchema, NewFoodSchemaType } from "./NewFood";
-import { UserSchemaType } from "./User";
 
 export type OrderSchemaType = {
   userId: string;
