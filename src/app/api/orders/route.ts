@@ -5,7 +5,6 @@ import { updateUser } from "@/lib/services/user-service";
 export async function GET() {
   let orders = await getAllOrders();
   const response = NextResponse.json({ data: orders }, { status: 200 });
-  console.log("+++++ALL ORDERS", orders, "ALL ORDERS+++++");
 
   return response;
 }
@@ -14,15 +13,6 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { userId, cartItemsTotalPrice, cartFoods, address } = body;
-
-    console.log("==userId==", userId, "==userId==");
-    console.log(
-      "==cartItemsTotalPrice==",
-      cartItemsTotalPrice,
-      "==cartItemsTotalPrice=="
-    );
-    console.log("==cartFoods==", cartFoods, "==cartFoods==");
-    console.log("==address==", address, "==address==");
 
     if (!userId || !cartItemsTotalPrice || !cartFoods?.length || !address) {
       return new NextResponse("Missing required fields", { status: 400 });

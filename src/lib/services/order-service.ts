@@ -12,8 +12,8 @@ export const createOrder = async ({
   cartItemsTotalPrice: number;
   cartFoods: OrderItemType[];
 }) => {
-  console.log(userId);
   await connectDB();
+
   const newOrder = new Order({
     userId: userId,
     totalPrice: cartItemsTotalPrice,
@@ -26,7 +26,7 @@ export const createOrder = async ({
 
 export const getAllOrders = async () => {
   await connectDB();
-  User;
+
   const orders: OrderSchemaType[] = await Order.find().populate("userId");
   return orders;
 };
@@ -37,4 +37,12 @@ export const updateOrder = async (orderId: string, newStatus: string) => {
     status: newStatus,
   });
   return updateOrder;
+};
+
+export const getUserOrders = async (email: string) => {
+  await connectDB();
+
+  const userId = await User.findOne({ email: email }, "_id");
+  console.log({ userId });
+  const getUserOrders = await Order.find({ email: email });
 };
