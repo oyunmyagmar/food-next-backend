@@ -6,12 +6,9 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { orderId, newStatus } = body;
 
-    console.log(orderId, "orderId");
-    console.log(newStatus, "newStatus");
-
     await updateOrder(orderId, newStatus);
 
-    return NextResponse.json({});
+    return NextResponse.json({ message: "Status updated!" });
   } catch (error) {
     console.error(error);
   }

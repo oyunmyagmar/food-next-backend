@@ -11,7 +11,6 @@ export async function POST(request: NextRequest) {
 
     const registeredUser = await User.findOne({ email });
 
-    console.log({ registeredUser });
     if (!registeredUser) {
       return NextResponse.json(
         { succes: false, message: "Invalid email. Please try again" },

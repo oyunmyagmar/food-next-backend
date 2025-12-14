@@ -78,16 +78,6 @@ export async function PUT(request: NextRequest) {
     const image = formEditedData.get("editedImage") as File | string;
     const foodId = formEditedData.get("selectedFoodId") as string;
 
-    // if (!image) {
-    //   console.log("no image provided");
-    // } else if (typeof image === "string") {
-    //   console.log("image:", `${image}`);
-    // } else if (image instanceof File) {
-    //   console.log("image:", `${image.name} (${image.size} bytes)`);
-    // } else {
-    //   console.log("unknown image type");
-    // }
-
     if (!foodName || !categoryId || !ingredients || !price) {
       return NextResponse.json(
         { error: "Missing required fields" },
